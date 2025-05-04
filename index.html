@@ -163,7 +163,6 @@
       color: white;
       text-shadow: 0 1px 3px rgba(0,0,0,0.3);
     }
-
   </style>
 </head>
 <body>
@@ -171,16 +170,14 @@
     <h1>CHINACNU STEEL</h1>
   </header>
 
-  <!-- 实时时间显示 -->
   <div class="current-time" id="current-time"></div>
 
   <div class="container">
     <div class="intro">
       <h2>CHINACNU 多功能钢铁工具平台</h2>
-      <p>CHINACNU STEEL 是我们的底气，我们站在巨人的肩膀上看世界，我将带领你们一往无前，因为未来是属于我们的，愿 CNU 钢铁走进世界的每个角落。</p>
+      <p>CHINACNU STEEL 是我们的底气，我们站在巨人的肩膀上看世界，我将带领你们一往无前，因为未来是属于我们的，愿 CNU 钢铁走进世界的每个角落。  宋学文——亲笔</p>
     </div>
 
-    <!-- 工具卡片区域 -->
     <div class="grid">
       <div class="card">
         <h3>漆膜镀锌加价计算</h3>
@@ -212,9 +209,13 @@
         <p>查询钢铁产品的实时价格</p>
         <a href="https://yalesherwin.github.io/price/" target="_blank">进入工具</a>
       </div>
+      <div class="card">
+        <h3>打卡考勤系统</h3>
+        <p>员工每日打卡，自动统计本月出勤天数</p>
+        <a href="https://yalesherwin.github.io/attendance/" target="_blank">进入系统</a>
+      </div>
     </div>
 
-    <!-- 客户转账系统卡片 -->
     <div class="grid" style="justify-content: center; margin-top: 30px;">
       <div class="card" style="max-width: 360px;">
         <h3>公司客户转账系统</h3>
@@ -228,7 +229,6 @@
     © 2025 CHINACNU STEEL. All rights reserved.
   </footer>
 
-  <!-- 实时时间更新 -->
   <script>
     function updateTime() {
       var now = new Date();
@@ -238,13 +238,12 @@
       var hours = ('0' + now.getHours()).slice(-2);
       var minutes = ('0' + now.getMinutes()).slice(-2);
       var seconds = ('0' + now.getSeconds()).slice(-2);
-
       var currentTime = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
       document.getElementById('current-time').textContent = currentTime;
     }
 
-    setInterval(updateTime, 1000);  // 每秒更新一次时间
-    updateTime();  // 页面加载时立即显示时间
+    setInterval(updateTime, 1000);
+    updateTime();
   </script>
 </body>
 </html>
