@@ -15,6 +15,7 @@
       --text-light: #777;
       --border-radius: 16px;
       --box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      --time-bg: rgba(0, 0, 0, 0.6);
     }
 
     * {
@@ -57,6 +58,22 @@
       font-size: 28px;
       font-weight: 700;
       letter-spacing: 1px;
+    }
+
+    .current-time {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--time-bg);
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      z-index: 15;
     }
 
     .container {
@@ -147,104 +164,6 @@
       text-shadow: 0 1px 3px rgba(0,0,0,0.3);
     }
 
-    /* 背景效果切换 */
-    .background-wave {
-      background: url('https://www.example.com/wave-background.png') no-repeat center center fixed;
-      background-size: cover;
-    }
-
-    .background-stars {
-      background: url('https://www.example.com/star-background.png') no-repeat center center fixed;
-      background-size: cover;
-    }
-
-    /* 鼠标跟随效果 */
-    .cursor-follow {
-      position: absolute;
-      pointer-events: none;
-      width: 30px;
-      height: 30px;
-      background-color: var(--primary-color);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s ease-out;
-    }
-
-    /* 涟漪按钮 */
-    .ripple-button {
-      position: relative;
-      overflow: hidden;
-      padding: 15px 30px;
-      font-size: 16px;
-      color: white;
-      background-color: #3498db;
-      border-radius: 50px;
-      border: none;
-    }
-
-    .ripple-button::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 300%;
-      height: 300%;
-      background: rgba(255, 255, 255, 0.6);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      animation: ripple 0.6s linear;
-    }
-
-    @keyframes ripple {
-      100% {
-        transform: translate(-50%, -50%) scale(0);
-        opacity: 0;
-      }
-    }
-
-    /* 数字翻盘计数器 */
-    .counter {
-      font-size: 48px;
-      color: var(--primary-color);
-      font-weight: bold;
-    }
-
-    .counter span {
-      display: inline-block;
-      animation: flip 1s infinite;
-    }
-
-    @keyframes flip {
-      0%, 100% {
-        transform: rotateX(0);
-      }
-      50% {
-        transform: rotateX(180deg);
-      }
-    }
-
-    /* 加载动画 */
-    .loader {
-      border: 4px solid #f3f3f3;
-      border-top: 4px solid #3498db;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      animation: spin 2s linear infinite;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    /* 视差滚动效果 */
-    .parallax {
-      background-image: url('https://www.example.com/parallax-image.jpg');
-      background-attachment: fixed;
-      height: 100vh;
-      background-size: cover;
-    }
   </style>
 </head>
 <body>
@@ -252,12 +171,16 @@
     <h1>CHINACNU STEEL</h1>
   </header>
 
+  <!-- 实时时间显示 -->
+  <div class="current-time" id="current-time"></div>
+
   <div class="container">
     <div class="intro">
       <h2>CHINACNU 多功能钢铁工具平台</h2>
       <p>CHINACNU STEEL 是我们的底气，我们站在巨人的肩膀上看世界，我将带领你们一往无前，因为未来是属于我们的，愿 CNU 钢铁走进世界的每个角落。</p>
     </div>
 
+    <!-- 工具卡片区域 -->
     <div class="grid">
       <div class="card">
         <h3>漆膜镀锌加价计算</h3>
@@ -291,6 +214,7 @@
       </div>
     </div>
 
+    <!-- 客户转账系统卡片 -->
     <div class="grid" style="justify-content: center; margin-top: 30px;">
       <div class="card" style="max-width: 360px;">
         <h3>公司客户转账系统</h3>
@@ -304,27 +228,23 @@
     © 2025 CHINACNU STEEL. All rights reserved.
   </footer>
 
-  <!-- 精灵粒子效果生成器 -->
+  <!-- 实时时间更新 -->
   <script>
-    for (let i = 0; i < 40; i++) {
-      const sparkle = document.createElement('div');
-      sparkle.className = 'sparkle';
-      sparkle.style.left = Math.random() * 100 + 'vw';
-      sparkle.style.top = (100 + Math.random() * 100) + 'vh';
-      sparkle.style.animationDelay = Math.random() * 10 + 's';
-      sparkle.style.animationDuration = (6 + Math.random() * 6) + 's';
-      document.body.appendChild(sparkle);
+    function updateTime() {
+      var now = new Date();
+      var year = now.getFullYear();
+      var month = ('0' + (now.getMonth() + 1)).slice(-2);
+      var day = ('0' + now.getDate()).slice(-2);
+      var hours = ('0' + now.getHours()).slice(-2);
+      var minutes = ('0' + now.getMinutes()).slice(-2);
+      var seconds = ('0' + now.getSeconds()).slice(-2);
+
+      var currentTime = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
+      document.getElementById('current-time').textContent = currentTime;
     }
 
-    // 鼠标跟随
-    const cursor = document.createElement('div');
-    cursor.classList.add('cursor-follow');
-    document.body.appendChild(cursor);
-
-    document.addEventListener('mousemove', (e) => {
-      cursor.style.left = e.pageX + 'px';
-      cursor.style.top = e.pageY + 'px';
-    });
+    setInterval(updateTime, 1000);  // 每秒更新一次时间
+    updateTime();  // 页面加载时立即显示时间
   </script>
 </body>
 </html>
